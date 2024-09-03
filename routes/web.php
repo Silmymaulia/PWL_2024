@@ -7,7 +7,9 @@ use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\PhotoController;
-
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,7 +116,7 @@ Route::get('/user/{name?}', function ($name='John') {
 
 // Route::get(' /articles/{id}', [ArticlesController::class, 'articles']);
 
-Route::get('/', HomeController::class);
+// Route::get('/', HomeController::class);
 Route::get('/about', AboutController::class);
 Route::get('/articles/{id}', ArticlesController::class);
 
@@ -134,3 +136,21 @@ Route::resource('photos', PhotoController::class)->except(['create', 'store', 'u
 // });
 
 Route::get('/greeting', [WelcomeController::class, 'greeting']);
+
+
+//soal praktikum 1
+Route::get('/', [HomeController::class, 'index']);
+
+//soal praktikum 2
+Route::prefix('category')->group(function () {
+    Route::get('food-beverage', [ProductController::class, 'foodBeverage']);
+    Route::get('beauty-health', [ProductController::class, 'beautyHealth']);
+    Route::get('home-care', [ProductController::class, 'homeCare']);
+    Route::get('baby-kid', [ProductController::class, 'babyKid']);
+});
+
+//soal praktikum 3
+Route::get('/user/{id}/name/{name}', [UserController::class, 'profile']);
+
+//soal praktikum 4
+Route::get('/sale', [SaleController::class, 'sale']);
